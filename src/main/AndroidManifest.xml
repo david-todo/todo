@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="forgetmenot.todos">
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.Light">
+        <activity
+            android:name=".TodosMainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".databaseViewer.TodosEditUser"
+            android:label="DBView-User" />
+
+        <provider
+            android:name=".contentprovider.MyTodoContentProvider"
+            android:authorities="forgetmenot.todos.contentprovider" />
+
+        <activity
+            android:name=".databaseViewer.TodosDatabaseViewer"
+            android:label="@string/db_viewer" />
+        <activity
+            android:name=".databaseViewer.TodosEditList"
+            android:label="@string/list_edit_header" />
+        <activity
+            android:name=".databaseViewer.TodosListDisplayActivity"
+            android:label="DBView-ListHeaders" />
+        <activity android:name=".databaseViewer.TodosItemActivity" />
+        <activity android:name=".databaseViewer.TodosListInstDisplayActivity"
+            android:label="DBView-List Instance" />
+        <activity android:name=".databaseViewer.TodosListItemInstDisplayActivity"
+            android:label="DBView-List Instance Items"/>
+        <fragment android:name=".TodosMainNextList" />
+
+        <receiver android:name=".Receivers.StartAlarmReceiver"/>
+        <receiver android:name=".Receivers.DeadlineAlarmReceiver"/>
+        <receiver android:name=".Receivers.BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+        <service android:name=".setListAlarm"></service>
+    </application>
+
+</manifest>

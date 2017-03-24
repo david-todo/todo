@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:text="dbid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_dbid"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="listid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_listid"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="listname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_listname"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="starttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_start"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_deadline"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="alarmtype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_alarm"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="S"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_sun"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="M"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_mon"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="T"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_tue"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="W"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_wed"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="Th"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_thu"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="F"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_fri"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="Sa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_sat"
+
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="userid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listhead_tbl_userid"
+
+        android:layout_weight="1" />
+</LinearLayout>

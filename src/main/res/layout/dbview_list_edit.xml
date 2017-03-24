@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:id="@+id/list_edit_cons_layout">
+
+    <TextView
+        android:text="@string/list_edit_dbid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dbid_txt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="DBID" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        tools:layout_editor_absoluteY="3dp"
+        android:id="@+id/list_edit_listid"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toRightOf="@+id/dbid_txt"
+        android:layout_marginLeft="32dp"
+        android:hint="@string/list_edit_listid" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/list_edit_listname"
+        android:hint="@string/list_edit_listname"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/list_name_txt"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.08"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/list_edit_userid_val" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/start_time_edit"
+        android:hint="StartTime"
+        app:layout_constraintLeft_toLeftOf="@+id/deadline_edit"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/list_edit_listname" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/deadline_edit"
+        android:hint="Deadline"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/textView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/start_time_edit" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:id="@+id/alarm_type_spinner"
+        android:entries="@array/alarm_type"
+        app:layout_constraintLeft_toLeftOf="@+id/start_time_edit"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_sect_txt"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:text="@string/list_edit_new_item_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_item_btn"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toRightOf="@+id/save_list_btn"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:text="@string/list_edit_save_list_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_list_btn"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:text="@string/list_edit_deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        app:layout_constraintBaseline_toBaselineOf="@+id/deadline_edit"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:text="@string/list_edit_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/start_time_edit" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_tue_chbx"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tue_txt"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_mon_chbx"
+        android:layout_marginLeft="8dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_wed_chbx"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/wed_txt"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_tue_chbx"
+        android:layout_marginLeft="8dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_mon_chbx"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/mon_txt"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_sun_chbx"
+        android:layout_marginLeft="8dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_sun_chbx"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/sun_txt" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_thu_chbx"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_wed_chbx"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/thu_txt" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_sat_chbx"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_fri_chbx"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/sat_txt" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/due_fri_chbx"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/due_thu_chbx"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/fri_txt" />
+
+    <TextView
+        android:text="@string/list_edit_alarm_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alarm_sec_head_txt"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_type_spinner"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:text="@string/list_edit_sun_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sun_txt"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_sec_head_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_sun_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_sun_chbx" />
+
+    <TextView
+        android:text="@string/list_edit_tue_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tue_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/mon_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_tue_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_tue_chbx"
+        app:layout_constraintHorizontal_bias="0.62" />
+
+    <TextView
+        android:text="@string/list_edit_mon_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mon_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/sun_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_mon_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_mon_chbx" />
+
+    <TextView
+        android:text="@string/list_edit_wed_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wed_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/tue_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_wed_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_wed_chbx" />
+
+    <TextView
+        android:text="@string/list_edit_thu_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/thu_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/wed_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_thu_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_thu_chbx" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fri_txt"
+        android:text="@string/list_edit_fri_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/thu_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_fri_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_fri_chbx" />
+
+    <TextView
+        android:text="@string/list_edit_sat_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sat_txt"
+        app:layout_constraintBottom_toBottomOf="@+id/fri_txt"
+        app:layout_constraintLeft_toLeftOf="@+id/due_sat_chbx"
+        app:layout_constraintRight_toRightOf="@+id/due_sat_chbx" />
+
+    <TextView
+        android:text="@string/list_edit_listname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_name_txt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/list_edit_listname" />
+
+    <TextView
+        android:text="@string/list_edit_alarm_type_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alarm_type_txt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/alarm_type_spinner" />
+
+    <TextView
+        android:text="@string/list_edit_alarm_sect_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/alarm_sect_txt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        app:layout_constraintHorizontal_bias="0.4"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/deadline_edit" />
+
+    <TextView
+        android:text="@string/list_edit_userid_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_edit_userid_lbl"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/list_edit_userid_val" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/list_edit_userid_val"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/list_edit_listid"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/list_edit_userid_lbl"
+        android:layout_marginLeft="8dp"
+        android:hint="@string/list_edit_userid_lbl" />
+
+</android.support.constraint.ConstraintLayout>

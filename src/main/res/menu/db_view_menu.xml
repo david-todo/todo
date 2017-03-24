@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/DisplayList"
+        android:showAsAction="ifRoom"
+        android:title="Display List">
+
+    </item>
+
+    <item
+        android:id="@+id/AddUser"
+        android:showAsAction="ifRoom"
+        android:title="New User">
+    </item>
+    <item
+        android:id="@+id/AddList"
+        android:title="New List"
+        android:showAsAction="ifRoom">
+    </item>
+    <item
+        android:id="@+id/DispListHeadInst"
+        android:title="List Instance"
+        android:showAsAction="ifRoom">
+    </item>
+
+</menu>

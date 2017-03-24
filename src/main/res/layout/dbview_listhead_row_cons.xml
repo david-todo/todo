@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="DBID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_dbid"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:text="USERID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listheadinst_userid"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_dbid"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_dbid" />
+
+    <TextView
+        android:text="ListID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_headerid"
+        app:layout_constraintTop_toTopOf="@+id/listheadinst_userid"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listheadinst_userid"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:text="ListName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_listname"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_headerid"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_headerid"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:text="StartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_itemno"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/listiteminst_dbid" />
+
+    <TextView
+        android:text="deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_itemdesc"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_itemno"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_itemno" />
+
+    <TextView
+        android:text="Alarm Type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_alarm"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_itemdesc"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_itemdesc" />
+
+    <TextView
+        android:text="Su"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_notiftype"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/listiteminst_itemno"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:text="Mo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_distlist"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_notiftype"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_notiftype" />
+
+    <TextView
+        android:text="Tu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_status"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_distlist"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_distlist"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:text="Sa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_sat"
+        app:layout_constraintTop_toTopOf="@+id/cons_listhead_fri"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/cons_listhead_fri"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:text="Fr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_fri"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/cons_listhead_thu"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/cons_listhead_thu" />
+
+    <TextView
+        android:text="Th"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_thu"
+        app:layout_constraintTop_toTopOf="@+id/cons_listhead_wed"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/cons_listhead_wed"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:text="We"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cons_listhead_wed"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_status"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_status" />
+</android.support.constraint.ConstraintLayout>

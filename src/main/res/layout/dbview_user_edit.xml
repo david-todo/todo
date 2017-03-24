@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView android:id="@+id/user_edit_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:hint="@string/user_edit_id"
+        android:gravity="top" >
+    </TextView>
+
+    <EditText
+        android:id="@+id/user_edit_userid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:hint="@string/user_edit_userid"
+        android:imeOptions="actionNext" >
+    </EditText>
+    <EditText
+        android:id="@+id/user_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:hint="@string/user_edit_name"
+        android:imeOptions="actionNext" >
+    </EditText>
+
+    <Button
+        android:id="@+id/user_edit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/todo_edit_confirm" >
+    </Button>
+
+</LinearLayout>

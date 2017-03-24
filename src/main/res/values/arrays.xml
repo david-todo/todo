@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name = "priorities">]
+        <item>Urgent</item>
+        <item>Reminder</item>
+    </string-array>
+    <string-array name = "tables">
+        <item>Users</item>
+        <item>ListHeader</item>
+        <item>ListItem</item>
+        <item>ListHeaderInst</item>
+        <item>ListItemInst</item>
+    </string-array>
+    <string-array name = "alarm_type">
+        <item>Silent</item>
+        <item>Vibrate</item>
+        <item>Audible</item>
+    </string-array>
+    <string-array name="notif_type">
+        <item>SMS Text</item>
+        <item>Email</item>
+        <item>None</item>
+    </string-array>
+</resources>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="DBID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listiteminst_dbid"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/listiteminst_headerid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="HeaderID"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_dbid"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_dbid"
+        android:layout_marginTop="0dp" />
+
+    <TextView
+        android:id="@+id/listiteminst_listid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="ListId"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_headerid"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_headerid" />
+
+    <TextView
+        android:id="@+id/listiteminst_itemno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="ItemNo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listiteminst_dbid" />
+
+    <TextView
+        android:id="@+id/listiteminst_itemdesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Desc"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_itemno"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_itemno" />
+
+    <TextView
+        android:id="@+id/listiteminst_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Confirm"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_itemdesc"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_itemdesc" />
+
+    <TextView
+        android:id="@+id/listiteminst_notiftype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="NotifType"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_confirm"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/listiteminst_confirm" />
+
+    <TextView
+        android:id="@+id/listiteminst_distlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="DistList"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/listiteminst_itemno" />
+
+    <TextView
+        android:id="@+id/listiteminst_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Status"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_distlist"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_distlist" />
+
+    <TextView
+        android:id="@+id/listiteminst_compdatetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="compDateTime"
+        app:layout_constraintLeft_toRightOf="@+id/listiteminst_status"
+        android:layout_marginLeft="7dp"
+        app:layout_constraintTop_toTopOf="@+id/listiteminst_status"
+        android:layout_marginTop="0dp" />
+
+</android.support.constraint.ConstraintLayout>

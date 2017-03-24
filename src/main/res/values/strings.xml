@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">Todos</string>
+    <string name="hello">Hello World, Todo!</string>
+    <string name="no_todos">Currently there are no Todo items maintained</string>
+    <string name="menu_insert">Add Item</string>
+    <string name="menu_delete">Delete Todo</string>
+    <string name="todo_summary">Summary</string>
+    <string name="todo_description">Description</string>
+    <string name="todo_edit_summary">Summary</string>
+    <string name="todo_edit_description">Description</string>
+    <string name="todo_edit_confirm">Confirm</string>
+    <string name="user_edit_id">DBID</string>
+    <string name="user_edit_userid">UserID</string>
+    <string name="user_edit_name">Name</string>
+    <string name="db_viewer">DB Viewer</string>
+    <string name="list_edit_dbid">DBID</string>
+    <string name="list_edit_listid">ListID</string>
+    <string name="list_edit_listname">ListName</string>
+    <string name="list_hd_save_btn">Save List</string>
+    <string name="list_edit_start">Start Time</string>
+    <string name="list_edit_deadline">Deadline Time</string>
+    <string name="list_edit_save_list_btn">Save List</string>
+    <string name="list_edit_new_item_btn">New Item</string>
+    <string name="list_edit_header">DBView-ListHeader</string>
+    <string name="list_edit_alarm_head">Alarm Day Selection</string>
+    <string name="list_edit_mon_txt">Mon</string>
+    <string name="list_edit_tue_txt">Tue</string>
+    <string name="list_edit_wed_txt">Wed</string>
+    <string name="list_edit_thu_txt">Thu</string>
+    <string name="list_edit_fri_txt">Fri</string>
+    <string name="list_edit_sat_txt">Sat</string>
+    <string name="list_edit_sun_txt">Sun</string>
+    <string name="list_edit_alarm_type_txt">Alarm Type</string>
+    <string name="list_edit_alarm_sect_txt">Alarm Settings</string>
+    <string name="list_item_hd_lbl">List Header Info</string>
+    <string name="list_item_listid_lbl">List ID:</string>
+    <string name="list_item_listname_lbl">List Name:</string>
+    <string name="list_item_item_list_lbl">Item List</string>
+    <string name="item_desc_lbl">Item Desc</string>
+    <string name="item_desc_hint">Item Desc</string>
+    <string name="confirm_chkbx">Confirmation Required</string>
+    <string name="dist_list_lbl">Dist List</string>
+    <string name="item_edit_itemno">Item No</string>
+    <string name="edit_item_saveBtn">Save Item</string>
+    <string name="todos_main_listid_lbl">ListID:</string>
+    <string name="todos_main_start_lbl">Start:</string>
+    <string name="todos_main_deadline_lbl">Deadline:</string>
+    <string name="todos_main_listname_lbl">List Name:</string>
+    <string name="list_edit_userid_lbl">UserID:</string>
+    <string name="todos_main_time_lbl">Current Time:</string>
+    <string name="todos_main_alarmText">No Active Alarm</string>
+
+    <string name="todos_main_next_header_lbl">No Active List</string>
+    <string name="todos_main_next_line2_lbl">Next List - </string>
+    <string name="todos_main_next_day_lbl">On</string>
+    <string name="todos_main_next_time_lbl">at</string>
+    <string name="todos_main_no_active_list_lbl">No Active List</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_alarm_btn">Update Alarms</string>
+</resources>

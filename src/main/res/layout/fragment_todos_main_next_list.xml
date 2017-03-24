@@ -1,0 +1,102 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TodosMainNextList"
+    android:background="@color/colorPrimary">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:text="@string/todos_main_next_line2_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_line2_lbl"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/todos_main_next_day_lbl"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_listid"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@+id/todos_main_next_line2_lbl"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/todos_main_next_line2_lbl"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="@string/todos_main_next_day_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_day_lbl"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_day_val"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="@+id/todos_main_next_day_lbl"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/todos_main_next_day_lbl"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="@string/todos_main_next_time_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_time_lbl"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/todos_main_next_day_val"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/todos_main_next_day_lbl"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_time_val"
+        android:textSize="18sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/todos_main_next_time_lbl"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/todos_main_next_time_lbl"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/todos_main_next_listname"
+        android:textSize="18sp"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/todos_main_next_listid"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintTop_toTopOf="@+id/todos_main_next_line2_lbl" />
+
+</android.support.constraint.ConstraintLayout>
