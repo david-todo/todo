@@ -42,10 +42,11 @@ public class DeadlineAlarmReceiver extends WakefulBroadcastReceiver {
         c.close();
 
         if (nextList != null) {
-            intent.putExtra("next" + ListHeaderTable.COLUMN_LISTID, nextList.listid);
-            intent.putExtra("next" + ListHeaderTable.COLUMN_LISTNAME, nextList.listName);
-            intent.putExtra("next" + ListHeaderTable.COLUMN_STARTTIME, nextList.startTime);
-            intent.putExtra("nextstartday",nextList.startDay);
+            intent.putExtra(ListHeaderTable.COLUMN_LISTID, nextList.listid);
+            intent.putExtra(ListHeaderTable.COLUMN_LISTNAME, nextList.listName);
+            intent.putExtra(ListHeaderTable.COLUMN_STARTTIME, nextList.startTime);
+            intent.putExtra("startday",nextList.startDay);
+            intent.putExtra("intenttype","nextlist");
         }
 
         //change fragment

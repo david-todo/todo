@@ -36,82 +36,22 @@ public class StartAlarmReceiver extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        String list = String.valueOf(intent.getExtras().getInt("next" + ListHeaderTable.COLUMN_LISTID));
-        String selection = ListHeaderTable.COLUMN_LISTID + "=?";
-        String[] selectionArgs = {list};
+        int list = intent.getExtras().getInt(ListHeaderTable.COLUMN_LISTID);
+        String listname = intent.getExtras().getString(ListHeaderTable.COLUMN_LISTNAME);
         String status = "open";
 
-
         //create list header and item instances
-        //create list header instance
-        Cursor c = context.getContentResolver().query(MyTodoContentProvider.LISTHEADER_URI,
-                ListHeaderTable.PROJECTION, selection, selectionArgs, null, null);
+        Uri headInstUri = CustomUtils.addListInstance(context,list);
 
-        if (c != null) {
-            ContentValues headinstvalues = new ContentValues();
-            String user = getUser();
-            SimpleDateFormat sdfDay = new SimpleDateFormat("EEE");
-            SimpleDateFormat sdfDateTime = new SimpleDateFormat("yyyyMMdd hh:mm:ss");
-            Calendar cal = Calendar.getInstance();
-            String currDay = sdfDay.format(cal.getTime());
-            String currDateTime = sdfDateTime.format(cal.getTime());
-
-
-            headinstvalues.put(ListHeaderInstTable.COLUMN_USERID, user);
-            headinstvalues.put(ListHeaderInstTable.COLUMN_LISTID, c.getColumnIndexOrThrow(
-                    ListHeaderTable.COLUMN_LISTID));
-            headinstvalues.put(ListHeaderInstTable.COLUMN_STARTDATETIME, currDateTime);
-            headinstvalues.put(ListHeaderInstTable.COLUMN_STARTDAY, currDay);
-            headinstvalues.put(ListHeaderInstTable.COLUMN_OVERALLSTAT, status);
-
-            headInstUri = context.getContentResolver().insert(
-                    MyTodoContentProvider.LISTHEADERINST_URI, headinstvalues);
-
-            //create list item instance
-            if (headInstUri != null) {
-                int headInstId = CustomUtils.getIdfromUri(headInstUri);
-                if (headInstId != 0) {
-                    intent.putExtra(ListHeaderInstTable.COLUMN_ID,headInstId);
-                }
-
-                selection = ListItemTable.COLUMN_LISTID + "=?";
-                Cursor citem = context.getContentResolver().query(MyTodoContentProvider.LISTITEM_URI,
-                        ListItemTable.PROJECTION, selection, selectionArgs, null, null);
-
-                if (citem != null) {
-                    ContentValues[] iteminstvalues = new ContentValues[citem.getCount()];
-                    citem.moveToFirst();
-                    status = "open";
-                    for (int i=0;i<citem.getCount();i++) {
-                        ContentValues cv = new ContentValues();
-                        cv.put(ListItemInstTable.COLUMN_HEADINST_ID,headInstId);
-                        cv.put(ListItemInstTable.COLUMN_LISTID,list);
-                        cv.put(ListItemInstTable.COLUMN_ITEMNO,
-                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_ITEMNO)));
-                        cv.put(ListItemInstTable.COLUMN_ITEMDESC,
-                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_ITEMDESC)));
-                        cv.put(ListItemInstTable.COLUMN_CONFIRM,
-                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_CONFIRM)));
-                        cv.put(ListItemInstTable.COLUMN_NOTIF_TYPE,
-                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_NOTIF_TYPE)));
-                        cv.put(ListItemInstTable.COLUMN_DIST_LIST,
-                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_DIST_LIST)));
-                        cv.put(ListItemInstTable.COLUMN_STATUS,status);
-                        cv.put(ListItemInstTable.COLUMN_COMPDATETIME, "00000000 00:00:00");
-
-                        iteminstvalues[i] = cv;
-                        citem.moveToNext();
-                    }
-
-                    itemCount = context.getContentResolver().bulkInsert(
-                            MyTodoContentProvider.LISTITEMINST_URI,iteminstvalues);
-
-                }
-
+        if (headInstUri != null) {
+            int headInstId = CustomUtils.getIdfromUri(headInstUri);
+            if (headInstId != 0) {
+                intent.putExtra(ListHeaderInstTable.COLUMN_ID, headInstId);
+                intent.putExtra(ListHeaderInstTable.COLUMN_LISTID, list);
+                intent.putExtra(ListHeaderTable.COLUMN_LISTNAME, listname);
+                intent.putExtra("intenttype", "activelist");
             }
         }
-
-        c.close();
 
         /*change fragment */
         ObserveAlarmReceiver.getInstance().triggerObservers(intent);
@@ -121,7 +61,7 @@ public class StartAlarmReceiver extends WakefulBroadcastReceiver {
         Intent deadlineIntent = new Intent(context, DeadlineAlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(context,1002,deadlineIntent,0);
 
-        String deadline = intent.getExtras().getString("next" + ListHeaderTable.COLUMN_DEADLINE);
+        String deadline = intent.getExtras().getString(ListHeaderTable.COLUMN_DEADLINE);
         int alarmHr = CustomUtils.getHrIntfrom4charTime(deadline);
         int alarmMin = CustomUtils.getMinIntfrom4charTime(deadline);
 
@@ -139,8 +79,5 @@ public class StartAlarmReceiver extends WakefulBroadcastReceiver {
             alarmManager.set(AlarmManager.RTC_WAKEUP, alarmcal.getTimeInMillis(),
                     pendingIntent);
         }
-    }
-    private String getUser() {
-        return "sherreld";
     }
 }

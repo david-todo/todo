@@ -19,6 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import forgetmenot.todos.contentprovider.MyTodoContentProvider;
 import forgetmenot.todos.database.ListHeaderTable;
 import forgetmenot.todos.database.ListItemInstTable;
@@ -62,7 +65,13 @@ public class TodosMainActiveListFragment extends Fragment implements
 
         }
     }
-
+    @Override
+    public void onSaveInstanceState (Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(ListHeaderTable.COLUMN_LISTID, listid);
+        savedInstanceState.putString(ListHeaderTable.COLUMN_LISTNAME,listname);
+        savedInstanceState.putInt(ARG_HEADERID, headerInstId);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,38 +103,71 @@ public class TodosMainActiveListFragment extends Fragment implements
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        final String selection = ListItemInstTable.COLUMN_ID + "=?";
+                        final String[] selectionArgs = new String[] {String.valueOf(id)};
+
+                        String itemStatus = adapter.getCursor().getString(
+                                adapter.getCursor().getColumnIndexOrThrow(
+                                        ListItemInstTable.COLUMN_STATUS));
+
                         String itemConfirm = adapter.getCursor().getString(adapter.getCursor().getColumnIndexOrThrow(
                                 ListItemInstTable.COLUMN_CONFIRM));
 
-                        if (itemConfirm !=null) {
-                            if (itemConfirm.equals("1")) {
-                                //Confirm Dialog
-                                AlertDialog.Builder confirmDialog = new AlertDialog.Builder(
-                                        getActivity());
-                                confirmDialog.setTitle("Confirm Item Completion");
+                        if (itemStatus.equals("Complete")) {
+                            AlertDialog.Builder resetStatDialog = new AlertDialog.Builder(
+                                    getActivity());
+                            resetStatDialog.setTitle("Reset Item to Open");
+                            resetStatDialog.setMessage("Item Already Marked Complete. " +
+                                    "Reset to Open?");
+                            resetStatDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ContentValues values = new ContentValues();
+                                    values.put(ListItemInstTable.COLUMN_STATUS,"Open");
+                                    values.put(ListItemInstTable.COLUMN_COMPDATETIME, "00000000 00:00");
+                                    int rowsupdatedOpen = getActivity().getContentResolver().update(
+                                            MyTodoContentProvider.LISTITEMINST_URI,values,selection,selectionArgs);
 
-                                confirmDialog.setMessage("Complete Item XXX?");
-
-                                confirmDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
+                                    if (rowsupdatedOpen != 0) {
+                                        adapter.notifyDataSetChanged();
                                     }
-                                });
-                                confirmDialog.show();
+                                }
+                            });
+                            resetStatDialog.show();
+                        }else { //Item status is open
+                            if (itemConfirm != null) {
+                                if (itemConfirm.equals("1")) {
+                                    //Confirm Dialog
+                                    AlertDialog.Builder confirmDialog = new AlertDialog.Builder(
+                                            getActivity());
+                                    confirmDialog.setTitle("Confirm Item Completion");
+
+                                    confirmDialog.setMessage("Complete Item XXX?");
+
+                                    confirmDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                        }
+                                    });
+                                    confirmDialog.show();
+                                }
                             }
-                        }
+                            ContentValues values = new ContentValues();
+                            values.put(ListItemInstTable.COLUMN_STATUS,"Complete");
 
-                        String selection = ListItemInstTable.COLUMN_ID + "=?";
-                        String[] selectionArgs = new String[] {String.valueOf(id)};
+                            Calendar complCal = Calendar.getInstance();
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HHmm");
+                            String nowTime = sdf.format(complCal.getTime());
 
-                        ContentValues values = new ContentValues();
-                        values.put(ListItemInstTable.COLUMN_STATUS,"Complete");
-                        int rowsupdated = getActivity().getContentResolver().update(
-                                MyTodoContentProvider.LISTITEMINST_URI,values,selection,selectionArgs);
+                            values.put(ListItemInstTable.COLUMN_COMPDATETIME,nowTime);
+                            int rowsupdatedComp = getActivity().getContentResolver().update(
+                                    MyTodoContentProvider.LISTITEMINST_URI,values,selection,selectionArgs);
 
-                        if (rowsupdated != 0) {
-                            adapter.notifyDataSetChanged();
+                            if (rowsupdatedComp != 0) {
+                                adapter.notifyDataSetChanged();
+                            }
+
                         }
 
                     }

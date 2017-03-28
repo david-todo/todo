@@ -1,13 +1,21 @@
 package forgetmenot.todos;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
+import forgetmenot.todos.contentprovider.MyTodoContentProvider;
+import forgetmenot.todos.database.ListHeaderInstTable;
 import forgetmenot.todos.database.ListHeaderTable;
+import forgetmenot.todos.database.ListItemInstTable;
+import forgetmenot.todos.database.ListItemTable;
 
 /**
  * Created by SherrelD on 3/7/2017.
@@ -122,16 +130,16 @@ public class CustomUtils {
 
     }
 
-    public static ListInfo getNextList(Cursor c, String currday, String nowtime) {
+    public static ListInfo getNextListForDay(Cursor c, String selectday, String selecttime) {
         //get correct column name for day
-        String dayCol = getDayColumn(currday);
+        String dayCol = getDayColumn(selectday);
 
         //get list of listheaders active on current day
-        ArrayList<ListInfo> listheads = getTodayLists(c, dayCol, currday);
+        ArrayList<ListInfo> listheads = getTodayLists(c, dayCol, selectday);
 
-        if (listheads.size() == 0) {  //no lists valid today
+        if (listheads.size() == 0) { //no lists valid today
             return null;
-        }else {  //at least 1 list valid today
+        }else {
             //sort array list by deadline and then iterate through
             Collections.sort(listheads, new Comparator<ListInfo>() {
                 public int compare(ListInfo o1, ListInfo o2) {
@@ -142,7 +150,7 @@ public class CustomUtils {
             ListInfo returnItem = new ListInfo();
 
             for (ListInfo l : listheads) {
-                if (CustomUtils.compare4charTime(l.startTime, nowtime)==1) { //starttime is greater
+                if (CustomUtils.compare4charTime(l.startTime, selecttime)==1) { //starttime is greater
                     returnItem.listid = l.listid;
                     returnItem.startTime = l.startTime;
                     returnItem.startDay = l.startDay;
@@ -152,13 +160,37 @@ public class CustomUtils {
                 }
             }
 
-            if (returnItem.listid ==0) {
-                return null;
-            }else{
+            if (returnItem.listid != 0) {
                 return returnItem;
+            }else {
+                return null;
             }
         }
     }
+    public static ListInfo getNextList(Cursor c, String currday, String nowtime) {
+        Boolean todaylist = false;
+
+        ListInfo nextlist = getNextListForDay(c, currday, nowtime);
+
+        if (nextlist==null) {
+            //no list found for today, find next list on remaining days.
+            Boolean listfound = false;
+            String slidingDay = getNextDay(currday);
+            if (!todaylist) {
+                //execute this until we find a next valid list or until we run out of days
+                do {
+                    nextlist = getNextListForDay(c, slidingDay,"0000");
+                    if (nextlist!=null) {
+                        listfound = true;
+                    }
+                    slidingDay = getNextDay(slidingDay);
+                } while (!listfound && !slidingDay.equals(currday));
+            }
+
+        }
+        return nextlist;
+    }
+
 
     private static ArrayList<ListInfo> getTodayLists(Cursor c, String dayCol, String currDay) {
         //iterate through cursor and pull all lists with current day checkbox checked
@@ -246,5 +278,91 @@ public class CustomUtils {
                 return null;
         }
         return colname;
+    }
+
+    public static Uri addListInstance(Context context, int listid) {
+    /* This method takes a list header id and creates a new list
+       header instance and new list item instance records for each
+       item in the list */
+
+        String selection = ListHeaderTable.COLUMN_LISTID + "=?";
+        String[] selectionArgs = {String.valueOf(listid)};
+        String status = "open";
+
+       //get header row for list id
+        Cursor c = context.getContentResolver().query(MyTodoContentProvider.LISTHEADER_URI,
+                ListHeaderTable.PROJECTION, selection, selectionArgs, null, null);
+
+        Uri headInstUri = null;
+
+        if (c != null) {
+            ContentValues headinstvalues = new ContentValues();
+            String user = getUser();
+            SimpleDateFormat sdfDay = new SimpleDateFormat("EEE");
+            SimpleDateFormat sdfDateTime = new SimpleDateFormat("yyyyMMdd hh:mm:ss");
+            Calendar cal = Calendar.getInstance();
+            String currDay = sdfDay.format(cal.getTime());
+            String currDateTime = sdfDateTime.format(cal.getTime());
+            c.moveToFirst();
+            String listname = c.getString(c.getColumnIndexOrThrow(ListHeaderTable.COLUMN_LISTNAME));
+
+
+            headinstvalues.put(ListHeaderInstTable.COLUMN_USERID, user);
+            headinstvalues.put(ListHeaderInstTable.COLUMN_LISTID, c.getColumnIndexOrThrow(
+                    ListHeaderTable.COLUMN_LISTID));
+            headinstvalues.put(ListHeaderInstTable.COLUMN_STARTDATETIME, currDateTime);
+            headinstvalues.put(ListHeaderInstTable.COLUMN_STARTDAY, currDay);
+            headinstvalues.put(ListHeaderInstTable.COLUMN_OVERALLSTAT, status);
+
+            headInstUri = context.getContentResolver().insert(
+                    MyTodoContentProvider.LISTHEADERINST_URI, headinstvalues);
+
+            //create list item instance
+            if (headInstUri != null) {
+                int headInstId = CustomUtils.getIdfromUri(headInstUri);
+
+                selection = ListItemTable.COLUMN_LISTID + "=?";
+                Cursor citem = context.getContentResolver().query(MyTodoContentProvider.LISTITEM_URI,
+                        ListItemTable.PROJECTION, selection, selectionArgs, null, null);
+
+                if (citem != null) {
+                    ContentValues[] iteminstvalues = new ContentValues[citem.getCount()];
+                    citem.moveToFirst();
+                    status = "open";
+                    for (int i=0;i<citem.getCount();i++) {
+                        ContentValues cv = new ContentValues();
+                        cv.put(ListItemInstTable.COLUMN_HEADINST_ID,headInstId);
+                        cv.put(ListItemInstTable.COLUMN_LISTID,listid);
+                        cv.put(ListItemInstTable.COLUMN_ITEMNO,
+                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_ITEMNO)));
+                        cv.put(ListItemInstTable.COLUMN_ITEMDESC,
+                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_ITEMDESC)));
+                        cv.put(ListItemInstTable.COLUMN_CONFIRM,
+                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_CONFIRM)));
+                        cv.put(ListItemInstTable.COLUMN_NOTIF_TYPE,
+                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_NOTIF_TYPE)));
+                        cv.put(ListItemInstTable.COLUMN_DIST_LIST,
+                                citem.getString(citem.getColumnIndexOrThrow(ListItemTable.COLUMN_DIST_LIST)));
+                        cv.put(ListItemInstTable.COLUMN_STATUS,status);
+                        cv.put(ListItemInstTable.COLUMN_COMPDATETIME, "00000000 00:00:00");
+
+                        iteminstvalues[i] = cv;
+                        citem.moveToNext();
+                    }
+
+                    int itemCount = context.getContentResolver().bulkInsert(
+                            MyTodoContentProvider.LISTITEMINST_URI,iteminstvalues);
+
+                }
+
+            }
+        }
+
+        c.close();
+        return headInstUri;
+    }
+
+    public static String getUser() {
+        return "sherreld";
     }
 }

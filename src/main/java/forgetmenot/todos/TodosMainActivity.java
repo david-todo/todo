@@ -41,9 +41,6 @@ public class TodosMainActivity extends FragmentActivity
 
         getViews();
 
-        //reset Alarms with background service
-        Intent serviceIntent = new Intent(this, setListAlarm.class);
-        startService(serviceIntent);
 
         //check that activty is using the version with the fragment container layout
         if (findViewById(R.id.todos_main_fragmentContainer) != null) {
@@ -51,13 +48,33 @@ public class TodosMainActivity extends FragmentActivity
             //check if we are being restored from previous state so we do not end up
             //with overlapping fragments
             if (savedInstanceState != null) {
+                mNextListId.setText(savedInstanceState.getString("next" +
+                        ListHeaderTable.COLUMN_LISTID));
+                mNextListStartDay.setText(savedInstanceState.getString("nextstartday"));
+                mNextListStartTime.setText(savedInstanceState.getString("next" +
+                        ListHeaderTable.COLUMN_STARTTIME));
+                mNextListName.setText(savedInstanceState.getString("next" +
+                        ListHeaderTable.COLUMN_LISTNAME));
                 return;
             }
-            dispNoListFrag(null);
+            //only reset Alarms on first create, not if we are being restored.
+            //reset Alarms with background service
+            Intent serviceIntent = new Intent(this, setListAlarm.class);
+            startService(serviceIntent);
+
         }
 
     }
+    //Saved Instnace state
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("next" + ListHeaderTable.COLUMN_LISTID,mNextListId.getText().toString());
+        savedInstanceState.putString("next" + ListHeaderTable.COLUMN_STARTTIME,mNextListStartTime.getText().toString());
+        savedInstanceState.putString("nextstartday",mNextListStartDay.getText().toString());
+        savedInstanceState.putString("next" + ListHeaderTable.COLUMN_LISTNAME,mNextListName.getText().toString());
 
+    }
     //Create menu
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
@@ -114,7 +131,9 @@ public class TodosMainActivity extends FragmentActivity
                 new TodosMainActiveListFragment().newInstance(headinstid, listid, listname);
         FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
         transaction.replace(R.id.todos_main_fragmentContainer,activelist);
-        transaction.commit();
+        if (!isFinishing()) {
+            transaction.commit();
+        }
     }
 
     private void dispNoListFrag(ListInfo list) {
@@ -127,31 +146,35 @@ public class TodosMainActivity extends FragmentActivity
         }
 
         TodosMainNoActiveListFragment nolist = new TodosMainNoActiveListFragment();
+
         FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
-        transaction.replace(R.id.todos_main_fragmentContainer,nolist);
-        transaction.commit();
+        transaction.replace(R.id.todos_main_fragmentContainer, nolist);
+        if (!isFinishing()) {
+            transaction.commit();
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
         Intent i = (Intent) arg;
+        String intentType = i.getExtras().getString("intenttype");
         int headerInstId = i.getExtras().getInt(ListHeaderInstTable.COLUMN_ID);
 
-        if (headerInstId != 0) {
-            int listid = i.getExtras().getInt("next" + ListHeaderTable.COLUMN_LISTID);
-            String listname = i.getExtras().getString("next" + ListHeaderTable.COLUMN_LISTNAME);
+        if (intentType.equals("activelist")) {
+            int listid = i.getExtras().getInt(ListHeaderTable.COLUMN_LISTID);
+            String listname = i.getExtras().getString(ListHeaderTable.COLUMN_LISTNAME);
             dispActiveListFrag(headerInstId, listid, listname);
-        }else {
-            int nextListId = i.getExtras().getInt("next" + ListHeaderTable.COLUMN_LISTID);
+        }else { //no active list
+            int nextListId = i.getExtras().getInt(ListHeaderTable.COLUMN_LISTID);
             if (nextListId == 0) {
                 dispNoListFrag(null);
             }else {
                 //build ListInfo
                 ListInfo next = new ListInfo();
                 next.listid = nextListId;
-                next.listName = i.getExtras().getString("next" + ListHeaderTable.COLUMN_LISTNAME);
-                next.startTime = i.getExtras().getString("next" + ListHeaderTable.COLUMN_STARTTIME);
-                next.startDay = i.getExtras().getString("nextstartday");
+                next.listName = i.getExtras().getString(ListHeaderTable.COLUMN_LISTNAME);
+                next.startTime = i.getExtras().getString(ListHeaderTable.COLUMN_STARTTIME);
+                next.startDay = i.getExtras().getString("startday");
                 dispNoListFrag(next);
             }
         }
